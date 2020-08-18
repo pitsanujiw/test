@@ -7,22 +7,22 @@ let arrs = new Map()
 
 for (let i = 0; i < result.length; i++) {
     if (i > 9500 && i < 10001) {
-    console.log(i, result[i])
-    let ws = new Websocket('ws://ec2-13-229-148-190.ap-southeast-1.compute.amazonaws.com/client')
-    ws.on('error', (err) => {
-        ws.terminate();
-    })
-    ws.on('open', () => {
-        arrs.set(result[i], ws)
-        ws.send(JSON.stringify({ 'action': 'register', 'uuid': result[i].trim() }))
-        // ws.send(JSON.stringify({ 'action': 'subscribe', 'uuid': result[i].trim(), 'topic': 'alert' }))
-        ws.on('message', (message) => {
-            const result = JSON.parse(message)
-            console.log(i, result);
+        console.log(i, result[i])
+        let ws = new Websocket('ws://ec2-18-141-218-122.ap-southeast-1.compute.amazonaws.com/client')
+        ws.on('error', (err) => {
+            ws.terminate();
         })
-        ws.on('close', () => {
-            console.log(result[i].trim(), 'had close')
+        ws.on('open', () => {
+            arrs.set(result[i], ws)
+            ws.send(JSON.stringify({ 'action': 'register', 'uuid': result[i].trim() }))
+            // ws.send(JSON.stringify({ 'action': 'subscribe', 'uuid': result[i].trim(), 'topic': 'alert' }))
+            ws.on('message', (message) => {
+                const result = JSON.parse(message)
+                console.log(i, result);
+            })
+            ws.on('close', () => {
+                console.log(result[i].trim(), 'had close')
+            })
         })
-    })
     }
 }

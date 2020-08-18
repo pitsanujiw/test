@@ -9,7 +9,7 @@ let arrs = new Map()
 for (let i = 0; i < result.length; i++) {
     if (i > 3500 && i < 4501) {
         console.log(i, result[i])
-        let ws = new Websocket('ws://ec2-13-229-148-190.ap-southeast-1.compute.amazonaws.com/client')
+        let ws = new Websocket('ws://ec2-18-141-218-122.ap-southeast-1.compute.amazonaws.com/client')
         ws.on('error', (err) => {
             ws.terminate();
             counterror += 1;
