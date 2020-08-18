@@ -48,6 +48,7 @@ function reconnnect(uuid) {
         ws.terminate();
         counterror += 1;
         console.log(counterror, err)
+        reconnnect(uuid)
     })
 
     ws.on('open', () => {
@@ -57,7 +58,7 @@ function reconnnect(uuid) {
 
         ws.on('message', (message) => {
             const result = JSON.parse(message)
-            console.log(i, result);
+            console.log(uuid, result);
         })
 
         ws.on('close', () => {
